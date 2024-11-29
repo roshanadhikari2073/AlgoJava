@@ -27,12 +27,10 @@ public class Graph {
     }
 
     public boolean hasDFS(Integer source, Integer destination) {
-        Node s = getNode(source);
-        HashSet<Integer> visitedList = new HashSet<>();
-        return hasDFS(s, destination, visitedList);
+        return hasDFS(getNode(source), destination, new HashSet<Integer>());
     }
 
-    private boolean hasDFS(Node source, Integer destination, HashSet<Integer> visitedNodes) {
+    private boolean hasDFS(Node source, Integer destination, HashSet visitedNodes) {
         if(source.id == destination) return true;
         if(visitedNodes.contains(source.id)) return false;
 
@@ -44,9 +42,12 @@ public class Graph {
         return false;
     }
 
-    public boolean hasBFS(Node source, Node destination) {
+    public boolean hasBFS(Integer source, Integer destination) {
+        return hasBFS(getNode(source), getNode(destination), new HashSet<Integer>());
+    }
+
+    private boolean hasBFS(Node source, Node destination, HashSet alreadyVisited) {
         LinkedList<Node> nextNodes = new LinkedList<>();
-        HashSet<Integer> alreadyVisited = new HashSet<>();
         nextNodes.add(source);
 
         while(!nextNodes.isEmpty()) {
@@ -59,7 +60,6 @@ public class Graph {
                 nextNodes.add(child);
             }
         }
-
         return false;
     }
 }

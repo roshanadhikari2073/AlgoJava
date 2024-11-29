@@ -5,5 +5,6 @@ public class Main {
         g1.addEdge(1,3);
 
         System.out.println(g1.hasDFS(1,3));
+        System.out.println(g1.hasBFS(1,3));
     }
 }
