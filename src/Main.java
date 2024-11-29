@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        DFS g1 = new DFS();
+        Graph g1 = new Graph();
         g1.addEdge(1,2);
         g1.addEdge(1,3);
 

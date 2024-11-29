@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
-public class DFS {
+public class Graph {
 
     private LinkedHashMap<Integer, Node> nodeLookUp = new LinkedHashMap<>();
 
@@ -16,10 +16,7 @@ public class DFS {
     }
 
     private Node getNode(Integer id) {
-        if(!nodeLookUp.containsKey(id)) {
-            Node node = new Node(id);
-            nodeLookUp.put(id, node);
-        }
+        if(!nodeLookUp.containsKey(id)) nodeLookUp.put(id, new Node(id));
         return nodeLookUp.get(id);
     }
 
@@ -39,9 +36,30 @@ public class DFS {
         if(source.id == destination) return true;
         if(visitedNodes.contains(source.id)) return false;
 
+        visitedNodes.add(source.id);
+
         for(Node child: source.adjacent) {
             if(hasDFS(child, destination, visitedNodes)) return true;
         }
+        return false;
+    }
+
+    public boolean hasBFS(Node source, Node destination) {
+        LinkedList<Node> nextNodes = new LinkedList<>();
+        HashSet<Integer> alreadyVisited = new HashSet<>();
+        nextNodes.add(source);
+
+        while(!nextNodes.isEmpty()) {
+            Node node = nextNodes.remove();
+            if(node == destination) return true;
+            if(alreadyVisited.contains(node.id)) continue;
+            alreadyVisited.add(node.id);
+
+            for(Node child: node.adjacent) {
+                nextNodes.add(child);
+            }
+        }
+
         return false;
     }
 }
