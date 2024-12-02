@@ -14,3 +14,34 @@ class ThreeSum {
         return result;
     }
 }
+
+
+
+class SolutionTwo {
+    public String reverseWords(String s) {
+        char t[] = s.toCharArray();
+        char r[] = new char[s.length()];
+
+        int reversedSize = reversedSize(t, r, 0);
+        return new String(r, 0, reversedSize);
+    }
+
+    private int reversedSize(char t[], char r[], int index) {
+        if (index == t.length) return 0;
+        while (index < t.length && t[index] == ' ') index++;
+        int endIndex = index;
+
+        while (endIndex < t.length && t[endIndex] != ' ') endIndex++;
+
+        int reversedSize = reversedSize(t, r, endIndex);
+
+        if (reversedSize > 0) {
+            r[reversedSize] = ' ';
+            reversedSize++;
+        }
+        for (int i = index; i < endIndex; i++) {
+            r[reversedSize++] = t[i];
+        }
+        return reversedSize;
+    }
+}
