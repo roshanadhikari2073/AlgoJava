@@ -45,3 +45,37 @@ class SolutionTwo {
         return reversedSize;
     }
 }
+
+class OptimumSolution {
+
+    private String reverseString(String str) {
+        char[] s = str.toCharArray();
+        char[] l = new char[s.length];
+
+        int r = reverseChar(s, l, 0);
+        return new String(l, 0, r);
+    }
+
+    private int reverseChar(char[] str, char[] len, int index) {
+        if(index == str.length) return 0;
+
+        while(index < str.length && str[index] == ' ') index++;
+        int endIndex = index;
+
+        while(endIndex < str.length && str[index] != ' ') endIndex++;
+
+        int reversed = reverseChar(str, len, endIndex);
+
+        if(reversed > 0) {
+            len[reversed++] = ' ';
+            reversed++;
+        }
+
+        for(int i = index; index < endIndex; i++) {
+            len[reversed++] = str[index];
+        }
+
+        return reversed;
+    }
+
+}
